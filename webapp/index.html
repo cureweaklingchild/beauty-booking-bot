@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Календарь мастера</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">РАСПИСАНИЕ</p>
+        <h1 id="master-name">Календарь мастера</h1>
+      </div>
+      <button class="icon-button" id="refresh-button" aria-label="Обновить">↻</button>
+    </header>
+
+    <section class="month-switcher panel">
+      <button class="icon-button" id="previous-month" aria-label="Предыдущий месяц">‹</button>
+      <strong id="month-label"></strong>
+      <button class="icon-button" id="next-month" aria-label="Следующий месяц">›</button>
+    </section>
+
+    <section class="calendar panel">
+      <div class="weekdays"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
+      <div id="calendar-grid" class="calendar-grid"></div>
+    </section>
+
+    <section class="day-heading">
+      <div>
+        <p class="eyebrow">ВЫБРАННЫЙ ДЕНЬ</p>
+        <h2 id="selected-date-label">Выберите дату</h2>
+      </div>
+      <button class="primary-button" id="add-slot-button">+ Окно</button>
+    </section>
+
+    <section id="day-slots" class="slot-list"></section>
+
+    <section class="panel service-panel">
+      <div class="section-title"><h2>Услуги</h2><button class="text-button" id="add-service-button">Добавить</button></div>
+      <div id="service-list"></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop hidden" id="slot-modal">
+    <section class="modal">
+      <div class="modal-header"><h2>Новое окно</h2><button class="close-button" data-close="slot-modal">×</button></div>
+      <label>Услуга<select id="slot-service"></select></label>
+      <label>Дата<input type="date" id="slot-date"></label>
+      <label>Время <span class="hint">можно выбрать несколько</span><input type="time" id="slot-time"></label>
+      <div id="selected-times" class="chip-list"></div>
+      <button class="primary-button full-width" id="save-slot-button">Добавить окна</button>
+    </section>
+  </div>
+
+  <div class="modal-backdrop hidden" id="service-modal">
+    <section class="modal">
+      <div class="modal-header"><h2>Новая услуга</h2><button class="close-button" data-close="service-modal">×</button></div>
+      <label>Название<input id="service-name" placeholder="Например, Женская стрижка"></label>
+      <label>Длительность, минут<input type="number" id="service-duration" min="5" max="1440" value="60"></label>
+      <label>Цена, рублей<input type="number" id="service-price" min="0" value="0"></label>
+      <button class="primary-button full-width" id="save-service-button">Сохранить услугу</button>
+    </section>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
